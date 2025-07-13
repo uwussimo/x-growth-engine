@@ -1,222 +1,113 @@
-# X Growth Engine
+# x growth engine
 
-A powerful Chrome extension that provides AI-powered tweet suggestions with customizable tones when replying on X (formerly Twitter). Generate engaging, contextually relevant replies with just one click.
+ai writes your tweets. you focus on building.
 
-## ✨ Features
+## why this exists
 
-- **Inline Reply Suggestions**: Generate suggestions directly in X's interface without popups
-- **Multiple Tone Presets**: Choose from 6 different writing styles:
-  - 🚀 Gen-Z Founder (energetic, innovative, emoji-rich)
-  - 💼 Professional (formal, respectful, business-appropriate)
-  - 😊 Casual (friendly, conversational, relaxed)
-  - 🎯 Witty (clever, humorous, engaging)
-  - 🤝 Supportive (encouraging, empathetic, positive)
-  - ✏️ Custom (define your own tone)
-- **Smart Positioning**: Floating overlay that adapts to X's dynamic interface
-- **Dark/Light Mode**: Automatic theme detection matching X's appearance
-- **Focus-Triggered**: Non-intrusive - only appears when you focus on reply text areas
-- **One-Click Insertion**: Generated suggestions insert directly at cursor position
+twitter replies are noise. this cuts through it.
 
-## 🚀 Installation
+six tones. one click. done.
 
-### Method 1: Load Unpacked Extension (Recommended for Development)
+## what it does
 
-1. **Clone the repository**:
+- focuses on reply boxes only
+- generates three suggestions instantly
+- inserts text where your cursor is
+- matches twitter's dark mode
+- stays invisible until you need it
 
-   ```bash
-   git clone https://github.com/uwussimo/x-growth-engine.git
-   cd x-growth-engine
-   ```
+## install
 
-2. **Open Chrome Extension Management**:
+```bash
+git clone https://github.com/uwussimo/x-growth-engine.git
+cd x-growth-engine
+```
 
-   - Navigate to `chrome://extensions/`
-   - Enable "Developer mode" (toggle in top right)
+chrome://extensions/
 
-3. **Load the extension**:
-   - Click "Load unpacked"
-   - Select the project folder
-   - The extension should appear in your extensions list
+toggle developer mode.
 
-### Method 2: Install from Chrome Web Store
+load unpacked. select folder.
 
-_Coming soon - extension will be published to Chrome Web Store_
+## setup
 
-## ⚙️ Setup
+get openai api key. starts with sk-
 
-### 1. Get an OpenAI API Key
+click extension icon. paste key. pick tone. save.
 
-1. Visit [OpenAI Platform](https://platform.openai.com/)
-2. Create an account or sign in
-3. Navigate to API Keys section
-4. Create a new API key (starts with `sk-`)
+## use
 
-### 2. Configure the Extension
+reply to any tweet. focus text area. hit generate. click suggestion.
 
-1. Click the X Growth Engine icon in your Chrome toolbar
-2. Click "Open Options" or right-click the extension icon → "Options"
-3. Enter your OpenAI API key
-4. Select your preferred tone preset or create a custom one
-5. Click "Save Settings"
+## tones
 
-## 🎯 Usage
+gen-z founder — energy, innovation, emojis
+professional — corporate safe
+casual — friendly neighbor  
+witty — clever without trying
+supportive — empathy first
+custom — your rules
 
-### Basic Usage
+## how it works
 
-1. **Navigate to X (twitter.com)** and log in
-2. **Find a tweet** you want to reply to
-3. **Click the reply button** on any tweet
-4. **Focus on the text area** - the X Growth Engine overlay will appear
-5. **Click "Generate"** to get AI-powered suggestions
-6. **Click any suggestion** to insert it into your reply
-7. **Edit if needed** and send your reply
+floats above twitter's interface. immune to their dom changes.
 
-### Advanced Features
+focuses only when you focus. disappears when you're done.
 
-- **Tone Customization**: Visit the options page to switch between different writing styles
-- **Custom Tones**: Define your own tone with specific instructions and examples
-- **Smart Positioning**: The overlay automatically positions itself optimally near the text area
-- **Error Handling**: Comprehensive error messages help troubleshoot API issues
+no popups. no interruptions. no friction.
 
-## 🛠️ Technical Details
+## tech
 
-### Architecture
+manifest v3. content script injection. floating overlay system.
 
-- **Manifest Version**: 3 (latest Chrome extension standard)
-- **Content Script**: Injected at document_start for optimal performance
-- **Floating Overlay**: Immune to X's SPA framework DOM manipulation
-- **Modern CSS**: Uses CSS variables with dark/light mode support
-- **Event-Driven**: Responds to focus events and DOM mutations
+881 lines of content script. 249 lines of styling.
 
-### Key Files
+works in chrome 88+. edge 88+. any chromium browser.
 
-- `manifest.json` - Extension configuration and permissions
-- `content.js` - Main functionality and UI injection (881 lines)
-- `content.css` - Styling that matches X's design language (249 lines)
-- `options.js` - Settings management and tone configuration
-- `popup.js` - Status interface showing current configuration
-- `background.js` - Service worker for extension lifecycle
-
-### Browser Compatibility
-
-- **Chrome**: 88+ (Manifest V3 support)
-- **Edge**: 88+ (Chromium-based)
-- **Other Chromium browsers**: Should work with Manifest V3 support
-
-## 🔧 Development
-
-### Prerequisites
-
-- Chrome browser (88+)
-- OpenAI API key
-- Basic understanding of Chrome extensions
-
-### Development Setup
-
-1. Clone the repository
-2. Load as unpacked extension in Chrome
-3. Make changes to the code
-4. Reload the extension in `chrome://extensions/`
-5. Test on X (twitter.com)
-
-### Project Structure
+## files
 
 ```
 x-growth-engine/
-├── manifest.json          # Extension configuration
-├── content.js            # Main content script
-├── content.css          # Styling for injected UI
-├── options.html         # Options page HTML
-├── options.js           # Options page functionality
-├── popup.html           # Extension popup HTML
-├── popup.js             # Extension popup functionality
-├── background.js        # Service worker
-└── README.md            # This file
+├── manifest.json
+├── content.js
+├── content.css
+├── options.html
+├── options.js
+├── popup.html
+├── popup.js
+├── background.js
+└── README.md
 ```
 
-### Key Components
+## contribute
 
-#### Content Script (`content.js`)
+fork. code. pull request.
 
-- Detects reply text areas on X
-- Injects floating overlay UI
-- Handles API communication with OpenAI
-- Manages text insertion and event handling
+test on twitter. break nothing. ship fast.
 
-#### Styling (`content.css`)
+## license
 
-- Matches X's current design language
-- Supports dark/light mode detection
-- Uses aggressive CSS specificity to override X's styles
-- Responsive design for different screen sizes
+mit.
 
-#### Options Page (`options.js`)
+## truth
 
-- Manages API key storage
-- Handles tone preset configuration
-- Provides custom tone editing interface
+not affiliated with twitter or openai.
 
-## 🤝 Contributing
+use responsibly. respect terms of service.
 
-We welcome contributions! Here's how to get started:
+## roadmap
 
-### Reporting Issues
+chrome web store
+claude support
+thread awareness
+bulk generation
+usage analytics
 
-1. Check existing issues first
-2. Create a detailed bug report including:
-   - Chrome version
-   - Extension version
-   - Steps to reproduce
-   - Expected vs actual behavior
-   - Console errors (if any)
+## support
 
-### Submitting Pull Requests
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Guidelines
-
-- Follow existing code style and patterns
-- Test thoroughly on X (twitter.com)
-- Ensure compatibility with X's frequent UI changes
-- Add comments for complex logic
-- Update README if adding new features
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🚨 Disclaimer
-
-This extension is not affiliated with X (formerly Twitter) or OpenAI. It's an independent project designed to enhance the X user experience. Use responsibly and in accordance with X's Terms of Service and OpenAI's usage policies.
-
-## 🔮 Roadmap
-
-- [ ] Chrome Web Store publication
-- [ ] Support for additional AI providers (Claude, Gemini)
-- [ ] Thread-aware suggestions
-- [ ] Sentiment analysis integration
-- [ ] Bulk reply generation
-- [ ] Analytics and usage insights
-- [ ] Custom prompt templates
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/uwussimo/x-growth-engine/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/uwussimo/x-growth-engine/discussions)
-- **Repository**: [GitHub Repository](https://github.com/uwussimo/x-growth-engine)
-
-## 🏆 Acknowledgments
-
-- OpenAI for providing the GPT API
-- X (Twitter) for the platform
-- The Chrome Extensions community for resources and support
-- All contributors and users who make this project possible
+issues: https://github.com/uwussimo/x-growth-engine/issues
+repo: https://github.com/uwussimo/x-growth-engine
 
 ---
 
-**Made with ❤️ by [@uwussimo](https://github.com/uwussimo)**
+built by [@uwussimo](https://github.com/uwussimo)
