@@ -831,11 +831,11 @@ function findAndInsertSuggestions(clickedElement) {
     document.removeEventListener("click", clickOutsideHandler);
   };
 
-  // Add click outside handler after a brief delay
+  // Add click outside handler after a delay to avoid conflicts with focus event
   setTimeout(() => {
     document.addEventListener("click", clickOutsideHandler);
-    console.log("👂 Click outside handler added");
-  }, 500); // Increased delay to avoid immediate triggering
+    console.log("👂 Click outside handler added (focus-optimized)");
+  }, 1000); // Longer delay since we're now focus-triggered
 
   // Verify insertion and add stability monitoring
   setTimeout(() => {
@@ -865,54 +865,46 @@ function findAndInsertSuggestions(clickedElement) {
   }, 100);
 }
 
-// Handle clicks on reply elements
-function handleReplyClick(event) {
-  const target = event.target;
-
-  // Check if this is a reply-related click with more specific detection
-  const isReplyClick =
-    target.closest('[data-testid="tweetTextarea_0"]') ||
-    target.closest('[data-testid="reply"]') ||
-    target.closest('[aria-label*="reply" i]') ||
-    target.closest('[aria-label*="Reply" i]') ||
-    target.closest('[data-testid="tweetButtonInline"]') ||
-    (target.matches('div[contenteditable="true"]') &&
-      target.getAttribute("data-testid") === "tweetTextarea_0") ||
-    // Also catch clicks on the reply button itself
-    target.closest('button[data-testid="reply"]');
-
-  if (isReplyClick) {
-    console.log("🎯 Reply click detected");
-
-    // Small delay to ensure X's UI has updated and the text area is available
-    setTimeout(() => {
-      try {
-        findAndInsertSuggestions(target);
-      } catch (error) {
-        console.error("❌ Error in handleReplyClick:", error);
-      }
-    }, 600); // Increased delay for more reliable detection
-  }
-}
-
-// Handle focus events on text areas
+// Handle focus events on text areas - main trigger for suggestions
 function handleFocus(event) {
   const target = event.target;
 
+  // Only trigger on the actual reply text area
   if (
     target.getAttribute("data-testid") === "tweetTextarea_0" ||
     (target.contentEditable === "true" &&
       target.closest('[data-testid="tweetTextarea_0"]'))
   ) {
-    console.log("🎯 Reply text area focused");
+    console.log("🎯 Reply text area focused - showing suggestions");
 
+    // Small delay to ensure X's UI has fully loaded the reply interface
     setTimeout(() => {
       try {
         findAndInsertSuggestions(target);
       } catch (error) {
         console.error("❌ Error in handleFocus:", error);
       }
-    }, 400);
+    }, 300);
+  }
+}
+
+// Handle clicks on reply elements (removed - now only focus triggers suggestions)
+function handleReplyClick(event) {
+  // This function is now minimal - just for debugging reply clicks
+  const target = event.target;
+
+  const isReplyClick =
+    target.closest('[data-testid="tweetTextarea_0"]') ||
+    target.closest('[data-testid="reply"]') ||
+    target.closest('[aria-label*="reply" i]') ||
+    target.closest('[aria-label*="Reply" i]') ||
+    target.closest('[data-testid="tweetButtonInline"]') ||
+    target.closest('button[data-testid="reply"]');
+
+  if (isReplyClick) {
+    console.log("🎯 Reply button clicked - waiting for text area focus");
+    // No longer automatically showing suggestions
+    // Suggestions will appear when user focuses on text area
   }
 }
 
@@ -945,42 +937,27 @@ function setupNavigationAndReplyDetection() {
     // Handle URL changes (SPA navigation)
     if (window.location.href !== currentUrl) {
       currentUrl = window.location.href;
-      console.log("🔄 Navigation detected, cleaning up");
+      console.log("🔄 Navigation detected, cleaning up suggestions");
       cleanupSuggestions();
     }
 
-    // Watch for new reply text areas appearing
+    // Only clean up suggestions if the text area disappears
+    // No longer auto-showing suggestions - only on focus
     mutations.forEach((mutation) => {
-      mutation.addedNodes.forEach((node) => {
+      mutation.removedNodes.forEach((node) => {
         if (node.nodeType === Node.ELEMENT_NODE) {
-          // Check if a tweet text area was added
-          const textArea =
+          // Check if a tweet text area was removed
+          const hadTextArea =
             node.querySelector &&
             node.querySelector('[data-testid="tweetTextarea_0"]');
-          if (textArea) {
-            console.log("🎯 New reply text area detected via mutation");
-            setTimeout(() => {
-              try {
-                findAndInsertSuggestions(textArea);
-              } catch (error) {
-                console.error("❌ Error in mutation observer:", error);
-              }
-            }, 800);
-          }
 
-          // Also check if the node itself is a text area
           if (
-            node.getAttribute &&
-            node.getAttribute("data-testid") === "tweetTextarea_0"
+            hadTextArea ||
+            (node.getAttribute &&
+              node.getAttribute("data-testid") === "tweetTextarea_0")
           ) {
-            console.log("🎯 Reply text area is the added node");
-            setTimeout(() => {
-              try {
-                findAndInsertSuggestions(node);
-              } catch (error) {
-                console.error("❌ Error in mutation observer (direct):", error);
-              }
-            }, 800);
+            console.log("🧹 Reply text area removed, cleaning up suggestions");
+            cleanupSuggestions();
           }
         }
       });
@@ -1024,12 +1001,12 @@ async function initialize() {
   }
 
   // Add event listeners
-  document.addEventListener("click", handleReplyClick, true);
-  document.addEventListener("focus", handleFocus, true);
+  document.addEventListener("click", handleReplyClick, true); // For debugging only
+  document.addEventListener("focus", handleFocus, true); // Main trigger for suggestions
 
   // Set up navigation and reply detection
   setupNavigationAndReplyDetection();
-  console.log("🔍 Navigation and reply detection set up");
+  console.log("🔍 Navigation detection set up");
 
   // Listen for theme changes
   window
@@ -1048,7 +1025,7 @@ async function initialize() {
     });
 
   // Extension ready for use
-  console.log("🎯 Ready to generate suggestions on reply interactions");
+  console.log("🎯 Suggestions will appear when you focus on reply text areas");
 
   console.log("✅ TweetWizard initialization complete");
 }
