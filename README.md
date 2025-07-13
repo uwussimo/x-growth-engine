@@ -40,13 +40,12 @@ click extension icon. paste key. pick tone. save.
 reply to any tweet. focus text area. hit generate. click suggestion.
 
 ## tones
-
-gen-z founder — energy, innovation, emojis
-professional — corporate safe
-casual — friendly neighbor  
-witty — clever without trying
-supportive — empathy first
-custom — your rules
+- gen-z founder — energy, innovation, emojis
+- professional — corporate safe
+- casual — friendly neighbor
+- witty — clever without trying
+- supportive — empathy first
+- custom — your rules
 
 ## how it works
 
