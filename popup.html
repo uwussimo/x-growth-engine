@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TweetWizard</title>
+    <style>
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f7f9fa;
+        --bg-hover: #f7f9fa;
+        --text-primary: #0f1419;
+        --text-secondary: #536471;
+        --border: #eff3f4;
+        --accent: #1d9bf0;
+        --success: #00ba7c;
+        --error: #f91880;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #000000;
+          --bg-secondary: #16181c;
+          --bg-hover: #1c1f23;
+          --text-primary: #e7e9ea;
+          --text-secondary: #71767b;
+          --border: #2f3336;
+          --accent: #1d9bf0;
+          --success: #00ba7c;
+          --error: #f91880;
+        }
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji",
+          "Noto Color Emoji", sans-serif;
+        width: 320px;
+        padding: 0;
+        margin: 0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+
+      .header {
+        background: var(--accent);
+        color: white;
+        padding: 16px 20px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .status-section {
+        margin-bottom: 20px;
+      }
+
+      .status-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+
+      .status-icon {
+        width: 16px;
+        text-align: center;
+      }
+
+      .status-text {
+        flex: 1;
+      }
+
+      .status-good {
+        color: var(--success);
+      }
+
+      .status-error {
+        color: var(--error);
+      }
+
+      .info-box {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .info-title {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+      }
+
+      .info-text {
+        color: var(--text-secondary);
+      }
+
+      .button {
+        width: 100%;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .button.primary {
+        background: var(--accent);
+        color: white;
+      }
+
+      .button.primary:hover {
+        background: #1a8cd8;
+        transform: translateY(-1px);
+      }
+
+      .button.secondary {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+      }
+
+      .button.secondary:hover {
+        background: var(--bg-hover);
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 16px 0;
+      }
+
+      .version {
+        text-align: center;
+        font-size: 11px;
+        color: var(--text-secondary);
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <span>🪄</span>
+      <span>TweetWizard</span>
+    </div>
+
+    <div class="content">
+      <div class="status-section">
+        <div class="status-item">
+          <span class="status-icon" id="apiStatus">⏳</span>
+          <span class="status-text">API Key</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon" id="toneStatus">⏳</span>
+          <span class="status-text">Tone Settings</span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-title">💡 How to Use</div>
+        <div class="info-text">
+          1. Go to any tweet on X.com<br />
+          2. Click Reply to open the text area<br />
+          3. Smart suggestions will appear below automatically!
+        </div>
+      </div>
+
+      <button id="openSettings" class="button primary">
+        <span>⚙️</span>
+        <span>Open Settings</span>
+      </button>
+
+      <button id="testOnX" class="button secondary">
+        <span>🐦</span>
+        <span>Go to X.com</span>
+      </button>
+
+      <div class="divider"></div>
+
+      <div class="version">Version 1.0 • Made with ❤️</div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

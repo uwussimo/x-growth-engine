@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TweetWizard Settings</title>
+    <style>
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f7f9fa;
+        --bg-hover: #f7f9fa;
+        --text-primary: #0f1419;
+        --text-secondary: #536471;
+        --border: #eff3f4;
+        --accent: #1d9bf0;
+        --error: #f91880;
+        --success: #00ba7c;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #000000;
+          --bg-secondary: #16181c;
+          --bg-hover: #1c1f23;
+          --text-primary: #e7e9ea;
+          --text-secondary: #71767b;
+          --border: #2f3336;
+          --accent: #1d9bf0;
+          --error: #f91880;
+          --success: #00ba7c;
+        }
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji",
+          "Noto Color Emoji", sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+      }
+
+      .container {
+        background: var(--bg-primary);
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border);
+      }
+
+      h2 {
+        color: var(--accent);
+        margin-bottom: 24px;
+        font-size: 28px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .section {
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .section h3 {
+        color: var(--text-primary);
+        margin-bottom: 16px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 14px;
+      }
+
+      input[type="text"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+
+      input[type="text"]:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(29, 155, 240, 0.1);
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+
+      .tone-presets {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .tone-preset {
+        padding: 12px 16px;
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: var(--bg-secondary);
+        text-align: center;
+      }
+
+      .tone-preset:hover {
+        border-color: var(--accent);
+        background: var(--bg-hover);
+      }
+
+      .tone-preset.selected {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: white;
+      }
+
+      .tone-preset-name {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .tone-preset-desc {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      .button {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-right: 12px;
+      }
+
+      .button:hover {
+        background: #1a8cd8;
+        transform: translateY(-1px);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      .button:disabled {
+        background: var(--text-secondary);
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .button.secondary {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+      }
+
+      .button.secondary:hover {
+        background: var(--bg-hover);
+      }
+
+      .status {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .success {
+        background: rgba(0, 186, 124, 0.1);
+        color: var(--success);
+        border: 1px solid rgba(0, 186, 124, 0.2);
+      }
+
+      .error {
+        background: rgba(249, 24, 128, 0.1);
+        color: var(--error);
+        border: 1px solid rgba(249, 24, 128, 0.2);
+      }
+
+      .info {
+        background: rgba(29, 155, 240, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(29, 155, 240, 0.2);
+        margin-bottom: 24px;
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .help {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 6px;
+      }
+
+      .current-key {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 8px;
+        padding: 8px 12px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+      }
+
+      .debug-info {
+        font-size: 11px;
+        color: var(--text-secondary);
+        margin-top: 16px;
+        padding: 12px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        white-space: pre-wrap;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>🪄 TweetWizard Settings</h2>
+
+      <!-- API Key Section -->
+      <div class="section">
+        <h3>🔑 OpenAI API Configuration</h3>
+
+        <div class="info">
+          <strong>How to get your OpenAI API key:</strong><br />
+          1. Go to
+          <a href="https://platform.openai.com/api-keys" target="_blank"
+            >OpenAI API Keys</a
+          ><br />
+          2. Click "Create new secret key"<br />
+          3. Copy and paste it below
+        </div>
+
+        <div class="form-group">
+          <label for="apiKey">OpenAI API Key:</label>
+          <input
+            type="text"
+            id="apiKey"
+            placeholder="Paste your sk-... key here"
+          />
+          <div class="help">
+            Your API key will be stored securely in your browser
+          </div>
+          <div id="currentKey" class="current-key"></div>
+        </div>
+
+        <button id="save" class="button">Save API Key</button>
+        <button id="test" class="button secondary">Test Storage</button>
+      </div>
+
+      <!-- Tone Settings Section -->
+      <div class="section">
+        <h3>🎯 Reply Tone & Style</h3>
+
+        <div class="form-group">
+          <label>Choose a preset tone:</label>
+          <div class="tone-presets">
+            <div class="tone-preset" data-tone="genz-founder">
+              <div class="tone-preset-name">🚀 Gen-Z Founder</div>
+              <div class="tone-preset-desc">
+                Innovative, bold, startup vibes
+              </div>
+            </div>
+            <div class="tone-preset" data-tone="professional">
+              <div class="tone-preset-name">💼 Professional</div>
+              <div class="tone-preset-desc">Polished, business-appropriate</div>
+            </div>
+            <div class="tone-preset" data-tone="casual">
+              <div class="tone-preset-name">😎 Casual</div>
+              <div class="tone-preset-desc">Friendly, conversational</div>
+            </div>
+            <div class="tone-preset" data-tone="witty">
+              <div class="tone-preset-name">🧠 Witty</div>
+              <div class="tone-preset-desc">Clever, humorous responses</div>
+            </div>
+            <div class="tone-preset" data-tone="supportive">
+              <div class="tone-preset-name">🤗 Supportive</div>
+              <div class="tone-preset-desc">Encouraging, positive</div>
+            </div>
+            <div class="tone-preset" data-tone="custom">
+              <div class="tone-preset-name">✏️ Custom</div>
+              <div class="tone-preset-desc">Define your own style</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" id="customToneGroup" style="display: none">
+          <label for="customTone">Custom Tone Instructions:</label>
+          <textarea
+            id="customTone"
+            placeholder="Describe the tone and style you want for your replies. E.g., 'Write in a tech-savvy, slightly sarcastic tone with occasional emoji use...'"
+          ></textarea>
+          <div class="help">
+            Be specific about tone, personality, emoji usage, length, etc.
+          </div>
+        </div>
+
+        <button id="saveTone" class="button">Save Tone Settings</button>
+      </div>
+
+      <div id="status" class="status" style="display: none"></div>
+      <div id="debug" class="debug-info"></div>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
