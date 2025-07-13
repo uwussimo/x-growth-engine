@@ -1,4 +1,4 @@
-# TweetWizard Chrome Extension
+# X Growth Engine
 
 A powerful Chrome extension that provides AI-powered tweet suggestions with customizable tones when replying on X (formerly Twitter). Generate engaging, contextually relevant replies with just one click.
 
@@ -24,8 +24,8 @@ A powerful Chrome extension that provides AI-powered tweet suggestions with cust
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/tweetwizard-extension.git
-   cd tweetwizard-extension
+   git clone https://github.com/uwussimo/x-growth-engine.git
+   cd x-growth-engine
    ```
 
 2. **Open Chrome Extension Management**:
@@ -53,7 +53,7 @@ _Coming soon - extension will be published to Chrome Web Store_
 
 ### 2. Configure the Extension
 
-1. Click the TweetWizard icon in your Chrome toolbar
+1. Click the X Growth Engine icon in your Chrome toolbar
 2. Click "Open Options" or right-click the extension icon → "Options"
 3. Enter your OpenAI API key
 4. Select your preferred tone preset or create a custom one
@@ -66,7 +66,7 @@ _Coming soon - extension will be published to Chrome Web Store_
 1. **Navigate to X (twitter.com)** and log in
 2. **Find a tweet** you want to reply to
 3. **Click the reply button** on any tweet
-4. **Focus on the text area** - the TweetWizard overlay will appear
+4. **Focus on the text area** - the X Growth Engine overlay will appear
 5. **Click "Generate"** to get AI-powered suggestions
 6. **Click any suggestion** to insert it into your reply
 7. **Edit if needed** and send your reply
@@ -122,7 +122,7 @@ _Coming soon - extension will be published to Chrome Web Store_
 ### Project Structure
 
 ```
-tweetwizard-extension/
+x-growth-engine/
 ├── manifest.json          # Extension configuration
 ├── content.js            # Main content script
 ├── content.css          # Styling for injected UI
@@ -206,9 +206,9 @@ This extension is not affiliated with X (formerly Twitter) or OpenAI. It's an in
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/tweetwizard-extension/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/tweetwizard-extension/discussions)
-- **Email**: support@tweetwizard.dev
+- **Issues**: [GitHub Issues](https://github.com/uwussimo/x-growth-engine/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/uwussimo/x-growth-engine/discussions)
+- **Repository**: [GitHub Repository](https://github.com/uwussimo/x-growth-engine)
 
 ## 🏆 Acknowledgments
 
@@ -219,4 +219,4 @@ This extension is not affiliated with X (formerly Twitter) or OpenAI. It's an in
 
 ---
 
-**Made with ❤️ by the TweetWizard team**
+**Made with ❤️ by [@uwussimo](https://github.com/uwussimo)**
