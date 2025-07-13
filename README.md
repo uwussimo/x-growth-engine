@@ -49,6 +49,8 @@ reply to any tweet. focus text area. hit generate. click suggestion.
 
 ## how it works
 
+<img width="588" height="561" alt="image" src="https://github.com/user-attachments/assets/269311d5-b11d-4364-bd4d-7144fd8e6ee6" />
+
 floats above twitter's interface. immune to their dom changes.
 
 focuses only when you focus. disappears when you're done.
